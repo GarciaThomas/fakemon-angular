@@ -5,7 +5,45 @@
 <html xmlns:th="http://www.thymeleaf.org" 
     th:replace="~{combat_layout.html :: layout(~{::body})}">
 
+    <label for = "selectJoueur"> Joueur sélectionné : </label> 
+    <select id = "selectJoueur"
+      [(ngModel)] = "player">
+        <option *ngFor = "let play of servPlayer.listPlayer"
+          [ngValue]="play">
+            &nbsp;{{play.nom}}&nbsp;
+        </option>
+    </select>
+
+    <br>
+
+    <label for = "selectMonster"> Monstre sélectionné : </label> 
+    <select id = "selectMonster"
+      [(ngModel)]="monstreJoueur">
+        <option *ngFor = "let mons of servMonster.listMonster">
+            &nbsp;{{mons.espece}}&nbsp;
+        </option>
+    </select>
+    <h3>Informations :</h3>
+    <p>
+        {{monstreJoueur.espece}}
+        {{monstreJoueur.type}}
+        niveau : {{monstreJoueur.level}}
+    </p> 
+
+<table>
+    <thead>
+        <th></th>
+    </thead>
+    <tbody></tbody>
+</table>
+
+
+
+
 <body>
+<!--
+
+
 	<div class="container" style="max-height:400px">
 		<div class="row h-100 align-items-center">
 			<img id="toastyJordan" style="position:absolute;left:-100vw;bottom:-21vh;z-index:1" src="assets/img/BJ.png"/>
@@ -17,7 +55,7 @@
               id="sceneCombat" 
               style="margin:0 auto; border:black 2px solid;background-color:#eaeaea">
 				<div class="row">
-					<!-- stat adverse -->
+					--><!-- stat adverse --><!--
 					<div id="blocAdv" class="font-mine" style="width:100%;padding:10px">
 						<div class="row no-gutters">
 							<div class="col text-right">
@@ -60,7 +98,7 @@
 					<div class="font-mine" id="encartMsgPlace" style="margin-left:20px;"></div>
 				</div>
 				<div class="row">
-					<!--  nos stat + actions -->
+					--><!--  nos stat + actions --><!--
 					
 					<div id="menu_actions"  class="font-mine w-100" style="padding:10px">
 						<h4 id="nomAttaquant"></h4>
@@ -76,9 +114,22 @@
 								
 							</div>
 							<span id="xp" style="margin-left:10px;"></span>
-							<button class="btn" onclick="listSwitch()">switch</button>
-							<button id="btnCapture" class="btn btn-link text-dark" onclick="capture()">Capture	
-							</button>
+                            <button class="btn" onclick="listSwitch()">switch</button>
+
+                            --><!--button *ngIf =() 
+                              id="btnCapture" 
+                              class="btn btn-link text-dark" 
+                              onclick="capture()">
+                                Capture	
+                            </button-->
+
+
+                            <!--
+if(this.type=="arena"){
+			$("#btnCapture").attr('disabled',true)
+		}
+                            --><!--
+                            
 						</div>
 						
 						<div id="menuSelectAtk" style="border-left:1px solid black;border-top: black 1px solid;border-radius:5px;margin-top:2px; box-shadow: 2px 2px">
@@ -86,13 +137,13 @@
 						</div>
 					</div>
 				</div>
-				<!--  <div class="row">
+            --><!--  <div class="row">
 					${sessionScope.attaquant}<br>
 					${sessionScope.adversaire}
-				</div>-->
+				</div>--><!--
 			</div>
 		</div>
-	</div>
+	</div>-->
 
 </body>
 </html>

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Player } from 'src/app/classes/player';
+import { Monster } from 'src/app/classes/monster';
+import { MonsterService } from 'src/app/services/monster.service';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-combat-interface',
@@ -6,23 +10,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./combat-interface.component.css']
 })
 export class CombatInterfaceComponent implements OnInit {
+  public arena: string;
+  public playerId: number;
+  public player: Player;
+  public monstreJoueur: Monster;
 
-  constructor() { }
+  constructor(public servMonster?: MonsterService,
+    public servPlayer?: PlayerService) { }
 
   ngOnInit() {
-    
+      this.servMonster.reload();
+      this.servPlayer.reload();
   }
+}
 
 
-
-
-  function setupMonsters(){
-		
-		if(scene.type=="arena"){
-			$("#btnCapture").attr('disabled',true)
-		}
-		
-		$.ajax({
+/*
 			type:'GET',
 			url: 'combat/setup',
 			success: function(resp){
@@ -69,27 +72,4 @@ export class CombatInterfaceComponent implements OnInit {
 					row.append(indic)
 					$('#menuSelectAtk').append(row)
 				})
-				
-			}
-		})
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-}
+        */
