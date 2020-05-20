@@ -1,0 +1,3 @@
+<div [style.top.px]="relativePosY" [style.left.px]="relativePosX" [style.width.px] = "transformFactor" [style.height.px] = "transformFactor" style="background-color:red;z-index:1;position:relative">
+    <span *ngIf="name" style="position:relative" [style.top.px]="transformFactor">{{name}}</span>
+</div>
