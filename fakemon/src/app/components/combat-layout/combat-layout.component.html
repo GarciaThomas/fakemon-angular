@@ -25,7 +25,15 @@
         
     </head>
     
-    <app-combat style = "100vh"> 
-    </app-combat> 
+    <combat-interface  
+      style = "100vh" 
+      [player] = "this.servPlayer.player"
+      [monstreJoueur] = "this.servPlayer.player.equipePlayer[0]"
+      [monstreAdverse] = "this.servPlayer.player.equipePlayer[1]" > 
+    </combat-interface> 
     
+
+
+
+
 </html>

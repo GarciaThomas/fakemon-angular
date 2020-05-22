@@ -1,11 +1,11 @@
 import { Attaque } from "./attaque";
 export class Monster{
 
-    nom : string = ""
-    pv : number = 0
-    pvMax : number = 0
-    exp : number = 0
-    expNextLevel : number = 0
+    nom : string;
+    pv : number;
+    pvMax : number;
+    exp : number;
+    expNextLevel : number;
     id?:number
     aSp?:number
     dSp?: number

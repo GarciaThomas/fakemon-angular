@@ -20,7 +20,7 @@ import { CombatLayoutComponent } from './components/combat-layout/combat-layout.
 
 
 const routes: Routes = [
-  { path: 'combat', component: CombatInterfaceComponent },
+  { path: 'combat', component: CombatLayoutComponent },
   { path: 'lien1', component: CombatInterfaceComponent },
   { path: 'game', component: GameComponent },
   { path: '', redirectTo: 'combat', pathMatch: 'full' },

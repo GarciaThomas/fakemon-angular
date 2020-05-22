@@ -1,30 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Player } from 'src/app/classes/player';
 import { Monster } from 'src/app/classes/monster';
 import { MonsterService } from 'src/app/services/monster.service';
 import { PlayerService } from 'src/app/services/player.service';
+import { CombatLayoutComponent } from '../combat-layout/combat-layout.component';
 
 @Component({
-  selector: 'app-combat-interface, [app-combat-interface]',
+  selector: 'combat-interface, [combat-interface]',
   templateUrl: './combat-interface.component.html',
   styleUrls: ['./combat-interface.component.css']
 })
 export class CombatInterfaceComponent implements OnInit {
-  public arena: string;
-  public playerId: number;
-  public player: Player;
-  public monstreJoueur: Monster;
+	public arena: string;
+	public playerId: number;
+	@Input() public player: Player;
+	@Input() public monstreJoueur: Monster;
+	@Input() public monstreAdverse: Monster;
+	public ratioPvAdv: string ;
+	public ratioPvPlay: number;
 
   constructor(public servMonster?: MonsterService,
-    public servPlayer?: PlayerService) { }
+	public servPlayer?: PlayerService,
+	public combatLayout?: CombatLayoutComponent) {}
 
-  ngOnInit() {
-      this.servMonster.reload();
-      this.servPlayer.reload();
-  }
+	ngOnInit() {
+		this.ratioPvAdvCalc();
+		this.ratioPvPlayCalc();
+     /* this.servMonster.reload();
+		this.servPlayer.reload();
+		this.servPlayer.findPlayer(1);
+		this.player = this.servPlayer.player;
+		this.monstreJoueur = this.player.equipePlayer[0];
+		this.monstreAdverse = this.player.equipePlayer[1];*/
+	}
 
+	public listSwitch() {
+	  //methode qui donne la liste des fakemon pour switch
+	}
 
+	public capture() {
+	  //pour lancer la capture
+	}
 
+	public ratioPvAdvCalc() {
+		let ratio = (this.monstreAdverse.pv*100)/(this.monstreAdverse.pvMax);
+		this.ratioPvAdv = ratio + "%";
+	}
+
+	public ratioPvPlayCalc() {
+		this.ratioPvPlay = (this.monstreJoueur.pv*100)/this.monstreJoueur.pvMax;
+	}
 
 }
 
