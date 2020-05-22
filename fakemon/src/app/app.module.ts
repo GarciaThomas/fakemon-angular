@@ -6,6 +6,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CombatInterfaceComponent } from './components/combat-interface/combat-interface.component';
+import { SceneComponent } from './components/scene/scene.component';
+import { AvatarComponent } from './components/avatar/avatar.component';
+
+import { HttpClientModule } from '@angular/common/http';
+import { SelectionMonstreComponent } from './components/selection-monstre/selection-monstre.component';
+import { GameComponent } from './components/game/game.component';
+import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+
+
+
 
 const routes: Routes = [
   { path: 'combat', component: CombatInterfaceComponent },
@@ -19,6 +29,11 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     CombatInterfaceComponent
+    SceneComponent,
+    AvatarComponent,
+    SelectionMonstreComponent,
+    GameComponent,
+    DialogBoxComponent,
   ],
   imports: [
     BrowserModule, FormsModule,

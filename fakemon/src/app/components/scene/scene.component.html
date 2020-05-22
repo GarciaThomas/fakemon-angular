@@ -1,0 +1,13 @@
+<div (keydown)="onKeyPress($event)" class="container p-0" style="width:400px;height:400px;border:blue solid 2px;z-index:0" [style.background] = "'url('+sceneData.background+')'">
+    
+    <!--<div  style="z-index:2;position:absolute" *ngFor="let s of sceneData.getScenes()" [style.top.px] = "s.top*40" [style.left.px] = "s.left*40" [style] = "s"  [style.width.px] = "'40'" [style.height.px] = "'40'"></div>-->
+    <avatar [y]="avatarPosY" [x]="avatarPosX"  style="position:absolute;border:green 1px solid"></avatar>
+    <selection-monstre *ngFor="let a of sceneData.getTriggersInteractions()"
+         [style]="{'top':a.pos[1]*40+'px','left':a.pos[0]*40+'px','position':'relative', 'z-index':1}" 
+         [positionX] = "avatarPosX" 
+         [positionY]="avatarPosY" 
+         [interaction]="a">
+    </selection-monstre>
+    
+</div>
+
