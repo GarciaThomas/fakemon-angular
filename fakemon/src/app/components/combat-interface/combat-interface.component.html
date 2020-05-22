@@ -77,10 +77,10 @@
                           style="width:40%;border:black 2px solid;">
 							<div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" 
 								role="progressbar"
-								style="width: 80%;"
+								[style.width]="ratioPvAdv"
 								aria-valuemin = "0"
-								aria-valuenow = "80"
-								aria-valuemax = "100">
+								[attr.aria-valuenow] = "monstreAdverse.pv"
+								[attr.aria-valuemax] = "monstreAdverse.pvMax">
 								{{ratioPvAdv}}
 							</div>
 						</div>
@@ -108,7 +108,7 @@
 				  style="min-height:20px;border-radius:5px;margin: 5 10px 0 10px; box-shadow: 2px 2px">
 					<div class="font-mine" 
 					  id="encartMsgPlace" 
-					  style="margin-left:20px;">
+					  style="margin-left:20px;"><p>{{msg}}</p>
 					</div>
 				</div>
 
@@ -153,7 +153,7 @@
 					{{monstreJoueur.listAttaque[1].nom}}
 					<br>
 					{{monstreJoueur.listAttaque[2].nom}}
-					
+					<button (click) = "attaquer()"></button>
 				</div>
 			</div>
 		</div>

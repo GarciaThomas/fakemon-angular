@@ -29,4 +29,8 @@ export class PlayerService {
     .subscribe( p => this.player = p);
   }
 
+  public findPlayerObservable(id: number) {
+    return this.http.get<Player>(this.apiUrl+'/'+id)
+  }
+
 }

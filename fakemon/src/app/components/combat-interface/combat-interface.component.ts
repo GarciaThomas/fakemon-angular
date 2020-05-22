@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange } from '@angular/core';
 import { Player } from 'src/app/classes/player';
 import { Monster } from 'src/app/classes/monster';
 import { MonsterService } from 'src/app/services/monster.service';
@@ -19,6 +19,8 @@ export class CombatInterfaceComponent implements OnInit {
 	public ratioPvAdv: string ;
 	public ratioPvPlay: number;
 
+	msg : string = ""
+
   constructor(public servMonster?: MonsterService,
 	public servPlayer?: PlayerService,
 	public combatLayout?: CombatLayoutComponent) {}
@@ -32,6 +34,23 @@ export class CombatInterfaceComponent implements OnInit {
 		this.player = this.servPlayer.player;
 		this.monstreJoueur = this.player.equipePlayer[0];
 		this.monstreAdverse = this.player.equipePlayer[1];*/
+	}
+	ngOnChanges(changes:SimpleChange){
+		console.log("CHANGEMENT")
+		this.ratioPvAdvCalc()
+		if(this.combatLayout.listeMessages){
+			this.msg = ""
+			for(let s of this.combatLayout.listeMessages){
+				this.msg += "\n"+s
+			}
+		}
+
+	}
+
+	baissePv(){
+		this.monstreAdverse.pv -= 1
+		let ratio = (this.monstreAdverse.pv*100)/(this.monstreAdverse.pvMax);
+		this.ratioPvAdv = ratio + "%";
 	}
 
 	public listSwitch() {
@@ -49,6 +68,10 @@ export class CombatInterfaceComponent implements OnInit {
 
 	public ratioPvPlayCalc() {
 		this.ratioPvPlay = (this.monstreJoueur.pv*100)/this.monstreJoueur.pvMax;
+	}
+
+	attaquer(){
+		this.combatLayout.envoyerCombat(this.monstreJoueur,this.monstreAdverse,17)
 	}
 
 }

@@ -25,11 +25,12 @@
         
     </head>
     
-    <combat-interface  
-      style = "100vh" 
-      [player] = "this.servPlayer.player"
-      [monstreJoueur] = "this.servPlayer.player.equipePlayer[0]"
-      [monstreAdverse] = "this.servPlayer.player.equipePlayer[1]" > 
+	<combat-interface 
+	  *ngIf="player && monstreDefenseur && monstreAttaquant" 
+      style = "height:100vh" 
+      [player] = "player"
+      [monstreJoueur] = "monstreAttaquant"
+      [monstreAdverse] = "monstreDefenseur" > 
     </combat-interface> 
     
 
