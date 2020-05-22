@@ -13,6 +13,7 @@ import { SelectionMonstreComponent } from './components/selection-monstre/select
 import { GameComponent } from './components/game/game.component';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 import { NpcComponent } from './components/npc/npc.component';
+import { CombatLayoutComponent } from './components/combat-layout/combat-layout.component';
 
 
 
@@ -35,6 +36,7 @@ const routes: Routes = [
     SelectionMonstreComponent,
     GameComponent,
     DialogBoxComponent,
+    CombatLayoutComponent,
     NpcComponent
   ],
   imports: [

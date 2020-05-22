@@ -5,7 +5,7 @@ import { MonsterService } from 'src/app/services/monster.service';
 import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
-  selector: 'app-combat-interface',
+  selector: 'app-combat-interface, [app-combat-interface]',
   templateUrl: './combat-interface.component.html',
   styleUrls: ['./combat-interface.component.css']
 })
