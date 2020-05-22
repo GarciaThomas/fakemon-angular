@@ -123,7 +123,11 @@
 								<div class="progress-bar" 
 									  role="progressbar" 
 									  id="progressPlayMon"
-									  style="width: 8%;">
+									  [style.width]="ratioPvPlay"
+									  aria-valuemin = "0"
+									  [attr.aria-valuenow] = "monstreJoueur.pv"
+									  [attr.aria-valuemax] = "monstreJoueur.pvMax">
+									  >
 									  {{ratioPvPlay}}
 								</div>
 								
@@ -147,13 +151,10 @@
 					</div>
 				</div>
             	<div class="row">
+					<div class="col">
+						<div class="row" *ngFor="let a of monstreJoueur.listAttaque"><button class="btn btn-link" (click) = "attaquer(a.id)">{{a.nom}}</button></div>
+					</div>
 					<!--Il faudra mettre des components avec @hostListener pour le choix d'attaque-->
-					{{monstreJoueur.listAttaque[0].nom}}
-					<br>
-					{{monstreJoueur.listAttaque[1].nom}}
-					<br>
-					{{monstreJoueur.listAttaque[2].nom}}
-					<button (click) = "attaquer()"></button>
 				</div>
 			</div>
 		</div>

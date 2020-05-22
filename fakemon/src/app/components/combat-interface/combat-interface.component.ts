@@ -17,7 +17,7 @@ export class CombatInterfaceComponent implements OnInit {
 	@Input() public monstreJoueur: Monster;
 	@Input() public monstreAdverse: Monster;
 	public ratioPvAdv: string ;
-	public ratioPvPlay: number;
+	public ratioPvPlay: string;
 
 	msg : string = ""
 
@@ -27,7 +27,6 @@ export class CombatInterfaceComponent implements OnInit {
 
 	ngOnInit() {
 		this.ratioPvAdvCalc();
-		this.ratioPvPlayCalc();
      /* this.servMonster.reload();
 		this.servPlayer.reload();
 		this.servPlayer.findPlayer(1);
@@ -64,14 +63,11 @@ export class CombatInterfaceComponent implements OnInit {
 	public ratioPvAdvCalc() {
 		let ratio = (this.monstreAdverse.pv*100)/(this.monstreAdverse.pvMax);
 		this.ratioPvAdv = ratio + "%";
+		this.ratioPvPlay = ((this.monstreJoueur.pv*100)/this.monstreJoueur.pvMax)+"%";
 	}
 
-	public ratioPvPlayCalc() {
-		this.ratioPvPlay = (this.monstreJoueur.pv*100)/this.monstreJoueur.pvMax;
-	}
-
-	attaquer(){
-		this.combatLayout.envoyerCombat(this.monstreJoueur,this.monstreAdverse,17)
+	attaquer(id){
+		this.combatLayout.envoyerCombat(this.monstreJoueur,this.monstreAdverse,id)
 	}
 
 }
