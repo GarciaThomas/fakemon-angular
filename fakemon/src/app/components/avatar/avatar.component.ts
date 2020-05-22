@@ -12,6 +12,8 @@ export class AvatarComponent implements OnInit {
   @Input() y : number = 0
   @Input() name : string = "thomas"
 
+  image = "assets/img/avatar.png"
+
   relativePosX : number = 0
   relativePosY : number = 0
 
