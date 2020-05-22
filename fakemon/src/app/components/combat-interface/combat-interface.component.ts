@@ -22,6 +22,10 @@ export class CombatInterfaceComponent implements OnInit {
       this.servMonster.reload();
       this.servPlayer.reload();
   }
+
+
+
+
 }
 
 

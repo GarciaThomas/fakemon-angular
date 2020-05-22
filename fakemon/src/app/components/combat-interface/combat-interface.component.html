@@ -7,7 +7,8 @@
 
     <label for = "selectJoueur"> Joueur sélectionné : </label> 
     <select id = "selectJoueur"
-      [(ngModel)] = "player">
+	  [(ngModel)] = "player"
+	  (change) = "servPlayer.findPlayer(player.id)">
         <option *ngFor = "let play of servPlayer.listPlayer"
           [ngValue]="play">
             &nbsp;{{play.nom}}&nbsp;
@@ -16,19 +17,30 @@
 
     <br>
 
-    <label for = "selectMonster"> Monstre sélectionné : </label> 
-    <select id = "selectMonster"
-      [(ngModel)]="monstreJoueur">
-        <option *ngFor = "let mons of servMonster.listMonster">
-            &nbsp;{{mons.espece}}&nbsp;
-        </option>
-    </select>
-    <h3>Informations :</h3>
-    <p>
-        {{monstreJoueur.espece}}
-        {{monstreJoueur.type}}
-        niveau : {{monstreJoueur.level}}
-    </p> 
+	<div *ngIf="player" >
+		<label for = "selectMonster"> Monstre sélectionné : </label> 
+		<select id = "selectMonster"
+		[(ngModel)]="monstreJoueur">
+			<option *ngFor = "let mons of servPlayer.player.equipePlayer"
+			  [ngValue]="mons">
+				&nbsp;{{mons.espece}}&nbsp;
+			</option>
+		</select>
+		<h3>Informations :</h3>
+	</div> 
+	<div *ngIf="monstreJoueur">
+		<p>
+			Fakemon : {{monstreJoueur.espece}}
+			<br>
+			Type : {{monstreJoueur.type}}
+			<br>
+			niveau : {{monstreJoueur.level}}
+			<br>
+			Attaque Speciale : {{monstreJoueur.aSp}}
+		</p>
+	</div>
+
+
 
 <table>
     <thead>

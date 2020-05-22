@@ -21,4 +21,12 @@ export class MonsterService {
         .subscribe( m => this.listMonster = m);
   }
 
+  /*
+  public monster2Player(player: Player) {
+    this.http.get<Array<Monster>>(this.apiUrl)
+    .subscribe( m => this.listMonster = m);
+  }*/
+
+
+
 }
