@@ -1,3 +1,5 @@
+import { Interaction } from './interaction'
+
 export class Scene{
     id : number = 1
     nowalk : Object = {}
@@ -42,7 +44,21 @@ export class Scene{
         }
         return scenes
     }
-    getTriggersInteractions(){
-        return this.triggers['interact']
+    getTriggersInteractionsSelect(){
+
+        let interactionsTrainees : Array<any> = []
+        for(let inter of this.triggers['interact']) {
+            interactionsTrainees.push(new Interaction(inter['pos'],inter['event_type'],inter['prop'],inter['dialogs']))
+        }
+        console.log(interactionsTrainees)
+        return interactionsTrainees.filter(i => i.event_type=="selection_starter")
+    }
+    getTriggersInteractionsTrainers(){
+        let interactionsTrainees : Array<any> = []
+        for(let inter of this.triggers['interact']) {
+            interactionsTrainees.push(new Interaction(inter['pos'],inter['event_type'],inter['prop'],inter['dialogs']))
+        }
+        console.log(interactionsTrainees)
+        return interactionsTrainees.filter(i => i.event_type=="trainer")
     }
 }

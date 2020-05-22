@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { SceneService } from 'src/app/services/scene.service';
 import { Scene } from 'src/app/classes/Scene';
 import { GameComponent } from '../game/game.component';
+import { Interaction } from 'src/app/classes/interaction';
 
 @Component({
   selector: 'scene',
@@ -14,7 +15,16 @@ export class SceneComponent {
   avatarPosY : number = 0
   authorizeWalk : boolean = true
 
+  trainersTriggers : Array<Interaction> = []
+  encountersTriggers : Array<Interaction> = []
+  selectionTriggers : Array<Interaction> = []
+  
   @Input() sceneData : Scene
+
+  onInit(){
+    this.trainersTriggers = this.sceneData.getTriggersInteractionsTrainers()
+    this.selectionTriggers = this.sceneData.getTriggersInteractionsSelect()
+  }
 
   constructor(private sceneSvc : SceneService, private gamescreen : GameComponent) { }
 

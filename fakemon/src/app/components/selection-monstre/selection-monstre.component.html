@@ -1,6 +1,12 @@
-<div *ngIf="!isSelected()" style="width:40px;height:40px;" 
-    [style.background-color] = "color" 
->
+<div style="width:40px;height:40px;">
     <img [src] = "background" [style]="{'margin' : 'auto','display':'block', 'position' : 'relative', 'top': propPosition[1]+'px','left': propPosition[0]+'px'}" />
-    <dialog-box *ngIf="showDialog" [msg]="'Veux tu choisir'+monster.nom+' ?'"><button (click)="selection()">ui</button></dialog-box>
+    <dialog-box *ngIf="showDialog ">
+        <div *ngIf = "!isSelected()">
+            <p style="text-align:center">Veux tu vhoisir {{monster.nom}}</p>
+            <button (click)="selection()">oui</button><button (click) = "refus()">non</button>
+        </div>
+        <div *ngIf = "isSelected()" style="text-align:center">
+            <p>Tu as déjà une equipe, petit voyou</p>
+        </div>
+    </dialog-box>
 </div>

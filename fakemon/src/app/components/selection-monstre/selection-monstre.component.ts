@@ -1,7 +1,9 @@
 import { Component, OnInit, SimpleChanges, Input } from '@angular/core';
 import { SceneComponent } from '../scene/scene.component';
 import { PartieService } from 'src/app/services/partie.service';
-import { Monster } from 'src/app/classes/Monster';
+import { Monster } from 'src/app/classes/monster';
+import { PlayerService } from 'src/app/services/player.service';
+import { Player } from 'src/app/classes/player';
 
 @Component({
   selector: 'selection-monstre',
@@ -19,13 +21,15 @@ export class SelectionMonstreComponent implements OnInit {
   background : string = ""
   showDialog : boolean = false
   monster : Monster
-  constructor(private pSvc : PartieService, private scene : SceneComponent) {
+  player : Player
+  constructor(private pSvc : PartieService, private scene : SceneComponent, private playSvc : PlayerService) {
     
    }
 
   color :string =  "blue"
 
   ngOnInit(): void {
+    this.pSvc.getPlayer().subscribe(data => this.player = new Player(data['id'],data['nom'],data['equipePlayer']))
     this.pSvc.getStarters().subscribe(data => this.monster = this.pSvc.buildMonstre(data))
     if(this.interaction['prop'].hasOwnProperty("offset")){
       this.offset = this.interaction['prop']['offset']
@@ -54,6 +58,11 @@ export class SelectionMonstreComponent implements OnInit {
       if(this.interaction['pos'][0] == this.positionX && this.interaction['pos'][1] == this.positionY){
         this.showDialog=true
         this.scene.authorizeWalk = false
+        if(this.isSelected){
+          this.scene.authorizeWalk = true
+        }
+      }else{
+        this.showDialog = false
       }
   }
 
@@ -61,8 +70,13 @@ export class SelectionMonstreComponent implements OnInit {
     this.pSvc.selectStarters(this.monster)
   }
 
+  refus(){
+    this.showDialog=false
+    this.scene.authorizeWalk = true
+  }
+
   isSelected(){
-    return this.pSvc.starterSelected
+    return this.player.equipePlayer.length > 0
   }
 
 

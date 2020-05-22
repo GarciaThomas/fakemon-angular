@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
-import { Monster } from '../classes/Monster';
+import { Monster } from '../classes/monster';
 import { Player } from '../classes/player';
 
 @Injectable({

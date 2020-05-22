@@ -9,10 +9,11 @@ import { CombatInterfaceComponent } from './components/combat-interface/combat-i
 import { SceneComponent } from './components/scene/scene.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 
-import { HttpClientModule } from '@angular/common/http';
 import { SelectionMonstreComponent } from './components/selection-monstre/selection-monstre.component';
 import { GameComponent } from './components/game/game.component';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+import { NpcComponent } from './components/npc/npc.component';
+
 
 
 
@@ -20,7 +21,7 @@ import { DialogBoxComponent } from './components/dialog-box/dialog-box.component
 const routes: Routes = [
   { path: 'combat', component: CombatInterfaceComponent },
   { path: 'lien1', component: CombatInterfaceComponent },
-  { path: 'lien2', component: CombatInterfaceComponent },
+  { path: 'game', component: GameComponent },
   { path: '', redirectTo: 'combat', pathMatch: 'full' },
   { path: '**', component: CombatInterfaceComponent }
 ];
@@ -28,12 +29,13 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    CombatInterfaceComponent
+    CombatInterfaceComponent,
     SceneComponent,
     AvatarComponent,
     SelectionMonstreComponent,
     GameComponent,
     DialogBoxComponent,
+    NpcComponent
   ],
   imports: [
     BrowserModule, FormsModule,

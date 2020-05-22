@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ApiConfigService } from './api-config.service';
 import { HttpClient } from '@angular/common/http';
-import { Monster } from '../classes/Monster';
+import { Monster } from '../classes/monster';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PartieService {
   public starterSelected = false
-  private playerId : number = 1
+  public playerId : number = 1
   private urlPlayerApi : string  = ""
   constructor(private apiCfg:ApiConfigService, private http:HttpClient) {
       this.urlPlayerApi = `${apiCfg.apiUrl}/player`
@@ -18,14 +18,14 @@ export class PartieService {
       return this.http.get<any>(this.urlPlayerApi+'/'+this.playerId+'/starter/pop')
    }
    selectStarters(monstre){
-    console.log("Le monstre")
-    console.log(monstre)
     return this.http.post(this.urlPlayerApi+'/'+this.playerId+'/starter/',monstre).subscribe(() => this.starterSelected = true)
   }
 
+  getPlayer(){
+    return this.http.get<any>(this.urlPlayerApi+'/'+this.playerId)
+  }
+
   buildMonstre(obj){
-    console.log("Le monstre")
-    console.log(obj)
    return new Monster(
       obj['nom'],
       obj['pv'],

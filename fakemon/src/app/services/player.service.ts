@@ -10,6 +10,7 @@ export class PlayerService {
   private apiUrl: string;
   public listPlayer: Array<Player>;
   public player: Player;
+  public needAStarter: Boolean;
 
   constructor(private appConfig: AppConfigService, private http: HttpClient) { 
     this.apiUrl = `${ this.appConfig.url }/player`;
@@ -18,6 +19,7 @@ export class PlayerService {
   public reload() {
     this.http.get<Array<Player>>(this.apiUrl)
         .subscribe( p => this.listPlayer = p);
+
   }
 
 
@@ -26,5 +28,5 @@ export class PlayerService {
     this.http.get<Player>(this.apiUrl+'/'+id)
     .subscribe( p => this.player = p);
   }
-  
+
 }
