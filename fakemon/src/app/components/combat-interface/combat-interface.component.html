@@ -99,8 +99,8 @@
 				<div class="row">
 					<img 
 						id="imgPlay" 
-						src="assets/img/monsters/2.png" 
-						height="25"/>
+						[src]="'assets/img/monsters/'+assetJoueur+'.gif'" 
+						height = "150px"/>
 				</div>
 
 				<div class="row border-black" 
@@ -152,9 +152,8 @@
 				</div>
             	<div class="row">
 					<div class="col">
-						<div class="row" *ngFor="let a of monstreJoueur.listAttaque"><button class="btn btn-link" (click) = "attaquer(a.id)">{{a.nom}}</button></div>
+						<div class="row" *ngFor="let a of monstreJoueur.listAttaque"><attaque [attaque] = "a"></attaque></div>
 					</div>
-					<!--Il faudra mettre des components avec @hostListener pour le choix d'attaque-->
 				</div>
 			</div>
 		</div>

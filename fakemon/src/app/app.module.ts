@@ -14,6 +14,8 @@ import { GameComponent } from './components/game/game.component';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 import { NpcComponent } from './components/npc/npc.component';
 import { CombatLayoutComponent } from './components/combat-layout/combat-layout.component';
+import { AttaqueComponent } from './components/attaque/attaque.component';
+import { FormulaireComponent } from './components/formulaire/formulaire.component';
 
 
 
@@ -23,7 +25,8 @@ const routes: Routes = [
   { path: 'combat', component: CombatLayoutComponent },
   { path: 'lien1', component: CombatInterfaceComponent },
   { path: 'game', component: GameComponent },
-  { path: '', redirectTo: 'combat', pathMatch: 'full' },
+  { path: 'login', component : FormulaireComponent},
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: CombatInterfaceComponent }
 ];
 
@@ -37,7 +40,9 @@ const routes: Routes = [
     GameComponent,
     DialogBoxComponent,
     CombatLayoutComponent,
-    NpcComponent
+    NpcComponent,
+    AttaqueComponent,
+    FormulaireComponent
   ],
   imports: [
     BrowserModule, FormsModule,

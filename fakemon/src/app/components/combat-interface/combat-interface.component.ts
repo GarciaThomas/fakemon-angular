@@ -19,6 +19,8 @@ export class CombatInterfaceComponent implements OnInit {
 	public ratioPvAdv: string ;
 	public ratioPvPlay: string;
 
+	assetJoueur : string = ""
+
 	msg : string = ""
 
   constructor(public servMonster?: MonsterService,
@@ -35,6 +37,7 @@ export class CombatInterfaceComponent implements OnInit {
 		this.monstreAdverse = this.player.equipePlayer[1];*/
 	}
 	ngOnChanges(changes:SimpleChange){
+		this.assetJoueur = this.monstreJoueur.espece.toLowerCase()
 		console.log("CHANGEMENT")
 		this.ratioPvAdvCalc()
 		if(this.combatLayout.listeMessages){

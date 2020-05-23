@@ -3,6 +3,7 @@ import { PlayerService } from 'src/app/services/player.service';
 import { Monster } from 'src/app/classes/monster';
 import { Player } from 'src/app/classes/player';
 import { CombatService } from 'src/app/services/combat.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'combat-layout',
@@ -18,7 +19,7 @@ export class CombatLayoutComponent implements OnInit {
 
   listeMessages : Array<string> = []
 
-  constructor(private combatSvc:CombatService, public servPlayer: PlayerService) { }
+  constructor(private combatSvc:CombatService, public servPlayer: PlayerService, private router : Router) { }
 
   ngOnInit() {
     this.servPlayer.findPlayerObservable(1).subscribe(data => this.buildPlayer(data));

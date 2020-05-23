@@ -1,0 +1,5 @@
+<input [(ngModel)] = "login" type = "text" [placeholder]="login" />
+<input [(ngModel)] = "password" type = "text" [placeholder]="password" />
+<input [(ngModel)] = "passwordVerif" type = "text" *ngIf="inscriptionBool" />
+<a (click) = "inscriptionBool = !inscriptionBool">inscription</a>
+<a (click) = "inscriptionOuConnexion()">connexion</a>
