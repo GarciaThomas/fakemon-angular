@@ -1,0 +1,10 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-header" style="text-align : center">
+        <h5>{{player.nom}}</h5>
+    </div>
+    <div class="card-body">
+      <monster-list-item *ngFor="let m of getEquipe()" [monster]= "m"></monster-list-item>
+      <button class="btn btn-light" (click)="selectedToPlay()">Jouer</button>
+      <ng-content></ng-content>
+    </div>
+  </div>

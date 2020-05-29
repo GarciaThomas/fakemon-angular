@@ -10,7 +10,7 @@ import { CombatLayoutComponent } from '../combat-layout/combat-layout.component'
   templateUrl: './combat-interface.component.html',
   styleUrls: ['./combat-interface.component.css']
 })
-export class CombatInterfaceComponent implements OnInit {
+export class CombatInterfaceComponent {
 	public arena: string;
 	public playerId: number;
 	@Input() public player: Player;
@@ -19,7 +19,9 @@ export class CombatInterfaceComponent implements OnInit {
 	public ratioPvAdv: string ;
 	public ratioPvPlay: string;
 
-	assetJoueur : string = ""
+	switchBool : boolean = false
+
+
 
 	msg : string = ""
 
@@ -27,23 +29,13 @@ export class CombatInterfaceComponent implements OnInit {
 	public servPlayer?: PlayerService,
 	public combatLayout?: CombatLayoutComponent) {}
 
-	ngOnInit() {
-		this.ratioPvAdvCalc();
-     /* this.servMonster.reload();
-		this.servPlayer.reload();
-		this.servPlayer.findPlayer(1);
-		this.player = this.servPlayer.player;
-		this.monstreJoueur = this.player.equipePlayer[0];
-		this.monstreAdverse = this.player.equipePlayer[1];*/
-	}
 	ngOnChanges(changes:SimpleChange){
-		this.assetJoueur = this.monstreJoueur.espece.toLowerCase()
-		console.log("CHANGEMENT")
+		console.log(this.monstreJoueur)
 		this.ratioPvAdvCalc()
 		if(this.combatLayout.listeMessages){
 			this.msg = ""
 			for(let s of this.combatLayout.listeMessages){
-				this.msg += "\n"+s
+				this.msg += "\n"+this.combatLayout.listeMessages.shift()
 			}
 		}
 
@@ -55,12 +47,16 @@ export class CombatInterfaceComponent implements OnInit {
 		this.ratioPvAdv = ratio + "%";
 	}
 
-	public listSwitch() {
-	  //methode qui donne la liste des fakemon pour switch
+	public switch(m) {
+	  this.servMonster.save(this.monstreJoueur)
+	  setTimeout(()=>{
+		  this.monstreJoueur = m;
+		  this.ratioPvAdvCalc()
+		},150)
 	}
 
 	public capture() {
-	  //pour lancer la capture
+	  this.combatLayout.capturer()
 	}
 
 	public ratioPvAdvCalc() {
@@ -70,6 +66,7 @@ export class CombatInterfaceComponent implements OnInit {
 	}
 
 	attaquer(id){
+
 		this.combatLayout.envoyerCombat(this.monstreJoueur,this.monstreAdverse,id)
 	}
 

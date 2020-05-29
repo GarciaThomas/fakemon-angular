@@ -29,12 +29,17 @@ export class SelectionMonstreComponent implements OnInit {
   color :string =  "blue"
 
   ngOnInit(): void {
-    this.pSvc.getPlayer().subscribe(data => this.player = new Player(data['id'],data['nom'],data['equipePlayer']))
-    this.pSvc.getStarters().subscribe(data => this.monster = this.pSvc.buildMonstre(data))
+
+    this.pSvc.getStarters().subscribe(data => {
+      this.monster = data
+      //this.monster = this.pSvc.buildMonstre(data);
+      console.log("monstre choisit");
+      console.log(data)
+    })
     if(this.interaction['prop'].hasOwnProperty("offset")){
       this.offset = this.interaction['prop']['offset']
     }
-    console.log(this.interaction['pos'])
+
     this.propPosition = JSON.parse(JSON.stringify(this.interaction['pos']))
     if(this.offset == "bottom"){
       this.propPosition[0] = 0
@@ -49,12 +54,14 @@ export class SelectionMonstreComponent implements OnInit {
       this.propPosition[0] = 0
       this.propPosition[1] = -40
     }
-    console.log(this.propPosition)
+
     this.background = this.interaction['prop']['asset']
   }
   
   ngOnChanges(changes:SimpleChanges){
-    console.log(this.positionX+" : "+this.positionY)
+    this.player = this.scene.gamescreen.player
+    console.log("size")
+    console.log(this.player.equipePlayer.length)
       if(this.interaction['pos'][0] == this.positionX && this.interaction['pos'][1] == this.positionY){
         this.showDialog=true
         this.scene.authorizeWalk = false
@@ -67,7 +74,11 @@ export class SelectionMonstreComponent implements OnInit {
   }
 
   selection(){
-    this.pSvc.selectStarters(this.monster)
+    this.pSvc.selectStarters(this.monster).subscribe(data =>{
+     this.player = data
+     this.scene.gamescreen.player = data
+    })
+    this.showDialog = false
   }
 
   refus(){
@@ -76,6 +87,7 @@ export class SelectionMonstreComponent implements OnInit {
   }
 
   isSelected(){
+
     return this.player.equipePlayer.length > 0
   }
 

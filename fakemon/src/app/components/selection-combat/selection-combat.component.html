@@ -1,0 +1,17 @@
+<ul class="list-group" *ngFor="let fakemon of player.equipePlayer">
+    <li class="list-group-item" (click)="monster = fakemon; selected()">
+        <div class="row">
+            <div class="col">
+                <img [src]="'assets/img/monsters/'+fakemon.espece+'.gif'" width="40px" height="40px" />
+            </div>
+            <div class="col">
+                <span class="font-mine">{{fakemon.espece}}</span>
+            </div>
+            <div class="col">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar"  [style]="'width : '+(fakemon.pv/fakemon.pvMax*100)+'px'"></div>
+                </div>
+            </div>
+        </div>
+    </li>
+  </ul>

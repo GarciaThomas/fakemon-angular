@@ -1,6 +1,20 @@
 
-<div class="container">
-    <scene [sceneData] = "scene"></scene>
+<div class="container" >
+    <div class="row mt-3" *ngIf="!booleanCombat">
+        <div class="col-4" *ngIf="player">
+            <div monster-list-item  *ngFor="let m of player.equipePlayer" [monster]= "m">
+            </div>
+        </div>
+        <div class="col">
+            <scene [sceneData] = "scene"></scene>
+        </div>
+    </div>
+    <ng-container *ngIf="combatTriggered">
+        <selection-combat [player] = "player"></selection-combat>
+    </ng-container>
+    <div class="row" *ngIf="booleanCombat">
+        <combat-layout  style = "height:100%; width : 100%" [listeMonstre]="listeMonstreAdversaire" [monstreAttaquant] = "monstreJoueur" [monstreDefenseur] = "monstreAdversaire"></combat-layout>
+    </div>
 </div>
 
 

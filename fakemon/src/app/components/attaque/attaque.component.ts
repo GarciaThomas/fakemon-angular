@@ -4,7 +4,7 @@ import { Attaque } from 'src/app/classes/attaque';
 import { CombatInterfaceComponent } from '../combat-interface/combat-interface.component';
 
 @Component({
-  selector: 'attaque',
+  selector: '[attaque]',
   templateUrl: './attaque.component.html',
   styleUrls: ['./attaque.component.css']
 })
@@ -14,10 +14,11 @@ export class AttaqueComponent implements OnInit {
 
   showPopover = false
 
-  constructor(private combatLayout : CombatLayoutComponent, private combatInterface:CombatInterfaceComponent) { }
+  constructor(public combatLayout : CombatLayoutComponent, public combatInterface:CombatInterfaceComponent) { }
 
   ngOnInit(): void {
-    console.log(sessionStorage.getItem("monTest"))
+    console.log("init attaque")
+    console.log(this.attaque)
   }
 
   attaquer(){

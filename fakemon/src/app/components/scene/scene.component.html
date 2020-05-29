@@ -1,4 +1,4 @@
-<div (keydown)="onKeyPress($event)" class="container p-0" style="width:400px;height:400px;z-index:0" [style.background] = "'url('+sceneData.background+')'">
+<div *ngIf="sceneData" (keydown)="onKeyPress($event)" class="container p-0" style="width:400px;height:400px;z-index:0" [style.background] = "'url('+sceneData.background+')'">
     
    <avatar [y]="avatarPosY" [x]="avatarPosX"  style="position:absolute;"></avatar>
    <ng-container *ngIf="selectionTriggers.length > 0">
@@ -10,7 +10,12 @@
         </selection-monstre>
    </ng-container> 
     <ng-container *ngIf="trainersTriggers.length > 0">
-        <npc *ngFor="let a of trainersTriggers" [trainer] = a [style]="{'width':'40px','height':'40px','top':a.pos[1]*40+'px','left':a.pos[0]*40+'px','position':'relative', 'z-index':2,'border':'red solid 2px'}"></npc>
+        <npc *ngFor="let a of trainersTriggers" [trainer] = "a" [style]="{'width':'40px','height':'40px','top':a.pos[1]*40+'px','left':a.pos[0]*40+'px','position':'relative', 'z-index':4}">
+
+        </npc>
+    </ng-container>
+    <ng-container *ngIf="combatTriggered">
+        <selection-combat [player] = "gamescreen.player"></selection-combat>
     </ng-container>
 </div>
 

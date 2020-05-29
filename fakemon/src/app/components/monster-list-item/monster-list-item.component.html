@@ -1,0 +1,16 @@
+<div class="row w-100 " >
+    <div class="col-2">
+        <img [src]="'assets/img/monsters/'+monster.espece+'.gif'" width = "30px" height="30px"/>
+    </div>
+    <div class="col-4">
+        {{monster.espece}}
+    </div>
+    <div class="col-2">
+        {{monster.level}}
+    </div>
+    <div class="col-4">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" [style]="'width : '+(monster.pv/monster.pvMax*100)+'px'" ></div>
+          </div>
+    </div>
+</div>

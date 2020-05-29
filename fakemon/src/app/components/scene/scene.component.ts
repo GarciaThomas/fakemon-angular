@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, HostListener, Input, SimpleChange } from '@angular/core';
 import { SceneService } from 'src/app/services/scene.service';
 import { Scene } from 'src/app/classes/Scene';
 import { GameComponent } from '../game/game.component';
@@ -18,20 +18,29 @@ export class SceneComponent {
   trainersTriggers : Array<Interaction> = []
   encountersTriggers : Array<Interaction> = []
   selectionTriggers : Array<Interaction> = []
+
+  combatTriggered : boolean = false
   
   @Input() sceneData : Scene
+
+  ngOnChanges(changes : SimpleChange){
+    this.trainersTriggers = this.sceneData.getTriggersInteractionsTrainers()
+    this.selectionTriggers = this.sceneData.getTriggersInteractionsSelect()
+    this.avatarPosX = this.sceneData.startpos[0]
+    this.avatarPosY = this.sceneData.startpos[1]
+  }
 
   onInit(){
     this.trainersTriggers = this.sceneData.getTriggersInteractionsTrainers()
     this.selectionTriggers = this.sceneData.getTriggersInteractionsSelect()
+
   }
 
-  constructor(private sceneSvc : SceneService, private gamescreen : GameComponent) { }
+  constructor(private sceneSvc : SceneService, public gamescreen : GameComponent) { }
 
   @HostListener('document:keydown',['$event'])
   onKeyPress(e){
     if(this.authorizeWalk){
-      console.log(this.sceneData)
       if(e.keyCode == 38){
         // up
         let nextY = this.avatarPosY - 1
@@ -75,8 +84,26 @@ export class SceneComponent {
         }
       });
     }
+    
+    if(this.sceneData.triggers['encounter'].length > 0){
+      console.log(this.gamescreen.player.equipePlayer)
+      this.sceneData.triggers['encounter'].forEach(rencontre => {
+        if(rencontre['pos'][0] == this.avatarPosX &&  rencontre['pos'][1] == this.avatarPosY){
+          this.combatTriggered  = true
+          if(this.sceneData.type == "wilds"){
+            this.authorizeWalk = false
+            this.gamescreen.partieSvc.getRencontre().subscribe(data => {this.gamescreen.monstreAdversaire = data; console.log(data)})
+
+          }
+        }
+      });      
+    }
   }
   getScenesTriggers(){
+
     return this.sceneData.getScenes()
+  }
+  getPlayer(){
+    return this.gamescreen.player
   }
 }

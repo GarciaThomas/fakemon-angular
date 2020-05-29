@@ -1,0 +1,11 @@
+@keyframes addBlur {
+    from {backdrop-filter:blur(0px)}
+    to {backdrop-filter:blur(20px)}
+  }
+
+.blurry{
+    animation-name: addBlur;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}

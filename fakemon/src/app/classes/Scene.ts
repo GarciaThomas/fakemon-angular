@@ -7,14 +7,16 @@ export class Scene{
     style : Object = {}
     background : string = ""
     triggers : Object = {}
+    type : string = ""
 
-    constructor(id?:number,nowalk?:Object,startpos?:Array<number>,background?:string,style?:Object,triggers?:Object){
+    constructor(id?:number,type?:string,nowalk?:Object,startpos?:Array<number>,background?:string,style?:Object,triggers?:Object){
         this.id = id
         this.nowalk = nowalk
         this.startpos = startpos
         this.background = background
         this.style = style
         this.triggers = triggers
+        this.type = type
     }
 
     getScenes<Object>(){

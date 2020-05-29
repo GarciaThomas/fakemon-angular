@@ -1,53 +1,9 @@
-<p>combat-interface works!</p>
-
-
-<!DOCTYPE html>
-<html>
-<!--
-    <label for = "selectJoueur"> Joueur sélectionné : </label> 
-    <select id = "selectJoueur"
-	  [(ngModel)] = "player"
-	  (change) = "servPlayer.findPlayer(player.id)">
-        <option *ngFor = "let play of servPlayer.listPlayer"
-          [ngValue]="play">
-            &nbsp;{{play.nom}}&nbsp;
-        </option>
-    </select>
-
-    <br>
-
-	<div *ngIf="player" >
-		<label for = "selectMonster"> Monstre sélectionné : </label> 
-		<select id = "selectMonster"
-		[(ngModel)]="monstreJoueur">
-			<option *ngFor = "let mons of servPlayer.player.equipePlayer"
-			  [ngValue]="mons">
-				&nbsp;{{mons.espece}}&nbsp;
-			</option>
-		</select>
-		<h3>Informations :</h3>
-	</div> 
-	<div *ngIf="monstreJoueur">
-		<p>
-			Fakemon : {{monstreJoueur.espece}}
-			<br>
-			Type : {{monstreJoueur.type}}
-			<br>
-			niveau : {{monstreJoueur.level}}
-			<br>
-			Attaque Speciale : {{monstreJoueur.aSp}}
-		</p>
-	</div>
--->
 
 
 
 
+<div class="container" *ngIf=" monstreJoueur || monstreAdverse">
 
-
-
-<body *ngIf=" monstreJoueur || monstreAdverse">
-	<div class="container" style="max-height:400px">
 		<div class="row h-100 align-items-center">
 			<img id="toastyJordan" style="position:absolute;left:-100vw;bottom:-21vh;z-index:1" src="assets/img/BJ.png"/>
 			<audio id="toastyAudio">
@@ -91,16 +47,17 @@
 				<div class="row justify-content-end">
 					<img 
 						id="imgAdv" 
-						src="assets/img/monsters/1.png" 
-						height="25" 
-						style="transform: scaleX(-1)"/>
+						[src]="'assets/img/monsters/'+monstreAdverse.espece+'.gif'"
+						height="150" 
+						/>
 				</div>
 
 				<div class="row">
 					<img 
 						id="imgPlay" 
-						[src]="'assets/img/monsters/'+assetJoueur+'.gif'" 
-						height = "150px"/>
+						[src]="'assets/img/monsters/'+monstreJoueur.espece+'.gif'" 
+						height = "150px"
+						style="transform: scaleX(-1)"/>
 				</div>
 
 				<div class="row border-black" 
@@ -134,30 +91,46 @@
 							</div>
 							<span id="xp" style="margin-left:10px;">exp: {{monstreJoueur.exp}}/{{monstreJoueur.expNextLevel}}</span>
 							<br>
-                            <button class="btn" onclick="listSwitch()">switch</button>
+                            <button class="btn" (click)="switchBool =!switchBool">switch</button>
 
                             <button *ngIf ="player.idScene != 3" 
                               id="btnCapture" 
                               class="btn btn-link text-dark" 
-                              onclick="capture()">
+                              (click)="capture()">
                                 Capture	
                             </button>
                             
-						</div>
-						
-						<div id="menuSelectAtk" style="border-left:1px solid black;border-top: black 1px solid;border-radius:5px;margin-top:2px; box-shadow: 2px 2px">
-
 						</div>
 					</div>
 				</div>
             	<div class="row">
 					<div class="col">
-						<div class="row" *ngFor="let a of monstreJoueur.listAttaque"><attaque [attaque] = "a"></attaque></div>
+						<div *ngFor="let a of monstreJoueur.listAttaque" attaque [attaque]="a"></div>
+					</div>
+				</div>
+				<div class="row w-100 h-100 blurry no-gutters" style="position:absolute;z-index:5;top:0;left:0;" *ngIf="switchBool" >
+					<div class="col-6 mx-auto">
+						<div class="list-group" style="margin-top:50%;margin-bottom:50%">
+							<div class="list-group-item" *ngFor="let m of player.equipePlayer" (click)="switch(m);switchBool =!switchBool">
+								<div class="row">
+									<div class="col">
+										{{m.espece}}
+									</div>
+									<div class="col">
+										{{m.exp}}
+									</div>
+									<div class="col">
+										{{m.level}}
+									</div>
+									<div class="col">
+										{{m.pv}} / {{m.pvMax}}
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 
-</body>
-</html>
+		</div>
+</div>

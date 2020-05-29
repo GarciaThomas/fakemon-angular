@@ -1,40 +1,8 @@
-<p>combat-layout works!</p>
 
-
-
-
-<!DOCTYPE html>
-<html>
-
-	<head>
-
-		<meta charset="UTF-8">
-		<title>CombatLayout</title>
-		<!--script src="assets/js/combatMechanics.js"></script-->
-		<style>
-		@keyframes toaster{
-			0%	{left:-100vw}
-			100%	{left:-15vw}
-		}
-		.toast-it{
-			animation-name:toaster;
-			animation-duration:1s;
-			animation-direction:alternate;
-		}
-        </style>
-        
-    </head>
-    
-	<combat-interface 
-	  *ngIf="player && monstreDefenseur && monstreAttaquant" 
-      style = "height:100vh" 
-      [player] = "player"
-      [monstreJoueur] = "monstreAttaquant"
-      [monstreAdverse] = "monstreDefenseur" > 
-    </combat-interface> 
-    
-
-
-
-
-</html>
+<combat-interface 
+	*ngIf="player && (monstreDefenseur && monstreAttaquant) || (listeMonstre && monstreAttaquant)" 
+	style = "height:100%; width : 100%" 
+	[player] = "player"
+	[monstreJoueur] = "monstreAttaquant"
+	[monstreAdverse] = "monstreDefenseur" > 
+</combat-interface> 

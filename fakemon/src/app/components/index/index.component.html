@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row mt-2">
+        <carte-joueur *ngFor="let p of compte.characters" [player] = "p"><button class="btn btn-danger" (click)="supprimer(p)">supprimer</button></carte-joueur>
+    </div>
+    <div class="row mt-1">
+        <button class="btn btn-primary" (click)="showFormulaire = !showFormulaire">créer un joueur</button>
+    </div>
+    <div class="row mt-1" *ngIf="showFormulaire">
+        <form>
+            <div class="form-group">
+                <label >Nom</label>
+                <input name="nom" class="form-control" [(ngModel)] = "newCharacter.nom" type = "text" />
+                <small class="form-text text-muted">Entre le nom de ton personnage</small>
+            </div>
+            <button class="btn btn-primary" (click)="createCharacter()" >créer</button>
+        </form>
+      </div>
+</div>

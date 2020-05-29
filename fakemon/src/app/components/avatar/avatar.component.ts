@@ -27,6 +27,7 @@ export class AvatarComponent implements OnInit {
   ngOnChanges(changes:SimpleChanges){
     this.relativePosX = this.scene.avatarPosX * this.transformFactor
     this.relativePosY = this.scene.avatarPosY * this.transformFactor
+    this.name = this.scene.gamescreen.compte.login
   }
 
 }

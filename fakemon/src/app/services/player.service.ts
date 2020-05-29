@@ -22,6 +22,13 @@ export class PlayerService {
 
   }
 
+  public findAllPlayers(){
+    return this.http.get<Array<Player>>(this.apiUrl+"/joueur/"+sessionStorage.getItem('id_joueur'))
+  }
+
+  public delete(player : Player){
+    return this.http.delete(this.apiUrl+"/joueur/"+sessionStorage.getItem("id_joueur")+"/"+player.id).subscribe()
+  }
 
   //  Obtenir les infos d'un player
   public findPlayer(id: number) {
@@ -31,6 +38,23 @@ export class PlayerService {
 
   public findPlayerObservable(id: number) {
     return this.http.get<Player>(this.apiUrl+'/'+id)
+  }
+
+  public updatePlayer(p : Player){
+    return this.http.put<Player>(this.apiUrl,p)
+  }
+
+  public addPlayer(p:Player){
+    p.position=[]
+    p.cptArene=0
+    p.cptRencontre=0
+    p.equipePlayer=[]
+    p.idScene=1
+    p.maxArene=5
+    p.maxRencontre=10
+    console.log(p)
+    return this.http.post<Player>(this.apiUrl+'/',p)
+  
   }
 
 }

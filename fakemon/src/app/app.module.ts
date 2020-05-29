@@ -16,6 +16,11 @@ import { NpcComponent } from './components/npc/npc.component';
 import { CombatLayoutComponent } from './components/combat-layout/combat-layout.component';
 import { AttaqueComponent } from './components/attaque/attaque.component';
 import { FormulaireComponent } from './components/formulaire/formulaire.component';
+import { IndexComponent } from './components/index/index.component';
+import { CarteJoueurComponent } from './components/carte-joueur/carte-joueur.component';
+import { MonsterListItemComponent } from './components/monster-list-item/monster-list-item.component';
+import { SelectionCombatComponent } from './components/selection-combat/selection-combat.component';
+import { CombatLayoutAreneComponent } from './components/combat-layout-arene/combat-layout-arene.component';
 
 
 
@@ -26,6 +31,7 @@ const routes: Routes = [
   { path: 'lien1', component: CombatInterfaceComponent },
   { path: 'game', component: GameComponent },
   { path: 'login', component : FormulaireComponent},
+  { path: 'index', component : IndexComponent},
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: CombatInterfaceComponent }
 ];
@@ -42,7 +48,12 @@ const routes: Routes = [
     CombatLayoutComponent,
     NpcComponent,
     AttaqueComponent,
-    FormulaireComponent
+    FormulaireComponent,
+    IndexComponent,
+    CarteJoueurComponent,
+    MonsterListItemComponent,
+    SelectionCombatComponent,
+    CombatLayoutAreneComponent
   ],
   imports: [
     BrowserModule, FormsModule,

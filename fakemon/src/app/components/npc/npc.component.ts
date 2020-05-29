@@ -72,12 +72,22 @@ export class NpcComponent implements OnInit {
     console.log(this.dialogues.length)
     if(this.dialogues.length == 0){
       this.showDialogue = false;
-      this.scene.authorizeWalk = true;
+      //this.scene.authorizeWalk = true;
+      this.combat()
     }
     console.log(this.showDialogue)
     console.log(this.scene.authorizeWalk)
     this.ligneDialogue = this.dialogues.pop()
   }
 
+  combat(){
+    console.log("npc combat lancé")
+    this.scene.gamescreen.partieSvc
+      .getRandomSquad()
+      .subscribe(data => {
+        this.scene.gamescreen.listeMonstreAdversaire = data
+        this.scene.gamescreen.combatTriggered = true
+      })
+  }
 
 }

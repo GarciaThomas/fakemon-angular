@@ -1,3 +1,12 @@
-<button class="btn btn-link" (click) = "attaquer()">{{attaque.nom}}</button>
-<span class="fa fa-info-circle" (mouseenter) = "showPopover = true" (mouseleave) = "showPopover = false"></span>
+<div class="row">
+    <div class="col-4">
+        <button class="btn btn-link" (click) = "attaquer()" [disabled] = "combatLayout.monstreAttaquant.pv == 0 || combatLayout.monstreDefenseur.pv == 0">{{attaque.nom}}</button>
+    </div>
+    <div class="col-1">
+        <span class="fa fa-info-circle" (mouseenter) = "showPopover = true" (mouseleave) = "showPopover = false"></span>
+    </div>
+    <div class="col-6">
+        <span>[{{attaque.type}}] {{attaque.puissance}}</span>
+    </div>
+</div>
 <p class="popover dialog-box" *ngIf="showPopover && attaque.description">{{attaque.description}}</p>
